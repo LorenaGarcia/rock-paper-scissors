@@ -1,16 +1,12 @@
 import React from "react";
 import { Container, Icon, HR } from "./Game.styles";
 
-import imageRock from "../../images/mini-r.png";
-import imagePaper from "../../images/mini-p.png";
-import imageScissor from "../../images/mini-p.png";
-
-const Game = () => {
+const Game = ({ user, cpu, images }) => {
   return (
     <Container>
-      <Icon src={imageRock} alt="rock" />
+      <Icon src={images(user)} alt={images(user)} />
       <HR />
-      <Icon src={imagePaper} alt="paper" />
+      <Icon src={images(cpu)} alt={images(cpu)} />
     </Container>
   );
 };

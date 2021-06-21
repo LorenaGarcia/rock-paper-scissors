@@ -18,6 +18,7 @@ const Header = styled.div`
 
 const Main = styled.div`
   grid-area: main;
+  background-color: black;
   display: flex;
   justify-content: center;
 `;
@@ -32,9 +33,7 @@ const Title = styled.p`
 const ContainerMain = styled.div`
   width: 50%;
   max-width: 700px;
-
   @media (max-width: 480px) {
-    width: 100%;
     margin: 0rem 2rem;
   }
 `;
