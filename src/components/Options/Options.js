@@ -14,26 +14,29 @@ import imgRock from "../../images/rock.png";
 import imgPaper from "../../images/paper.png";
 import imgScissors from "../../images/scissors.png";
 
-const Options = ({ userWon, cpuWon, setUserMovement }) => {
+const Options = ({ userWon, cpuWon, isDisabled, setUserMovement }) => {
   return (
     <Container>
       <FlexOptions>
         <Circle
-          onClick={() => setUserMovement("R")}
+          disabled={isDisabled}
+          onClick={() => !isDisabled && setUserMovement("R")}
           background={"#9a7580"}
           shadow={"4px 5px 3px 0px #62424b"}
         >
           <ImageOptions src={imgRock} alt="rock" />
         </Circle>
         <Circle
-          onClick={() => setUserMovement("P")}
+          disabled={isDisabled}
+          onClick={() => !isDisabled && setUserMovement("P")}
           background={"#68857F"}
           shadow={"4px 5px 3px 0px #37514C"}
         >
           <ImageOptions src={imgPaper} alt="paper" />
         </Circle>
         <Circle
-          onClick={() => setUserMovement("S")}
+          disabled={isDisabled}
+          onClick={() => !isDisabled && setUserMovement("S")}
           background={"#8B8B8B"}
           shadow={"4px 5px 3px 0px #565656"}
         >

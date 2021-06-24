@@ -11,6 +11,7 @@ import imageScissor from "./images/mini-s.png";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
+  const [isDisabled, setDisabled] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [message, setMessage] = useState(null);
   const [userWon, setUserWon] = useState(0);
@@ -25,6 +26,10 @@ function App() {
       startGame();
     }
   }, [userMovement]);
+
+  useEffect(() => {
+    setDisabled(isLoading ? true : false);
+  }, [isLoading]);
 
   useEffect(() => {
     if (userMovement && cpuMovement) {
@@ -54,6 +59,7 @@ function App() {
         setMessage("It's a tie");
       }
       setIsLoading(false);
+      setDisabled(true);
 
       setTimeout(() => {
         setGameOver(true);
@@ -112,6 +118,8 @@ function App() {
       <Options
         userWon={userWon}
         cpuWon={cpuWon}
+        isDisabled={isDisabled}
+        isLoading={isLoading}
         setUserMovement={setUserMovement}
       />
       {allMovements.length !== 0 && (

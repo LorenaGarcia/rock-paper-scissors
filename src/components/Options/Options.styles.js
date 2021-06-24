@@ -28,6 +28,7 @@ const Circle = styled.div`
   box-shadow: ${(props) => props.shadow && props.shadow};
   border-radius: 100%;
   padding: 0.5rem;
+  opacity: ${(props) => (props.disabled ? "0.4" : "initial")};
 `;
 
 const FlexContainer = styled.div`
