@@ -28,6 +28,8 @@ const Title = styled.p`
   text-align: center;
   font-size: 30px;
   margin: 1rem;
+  font-family: "Oswald", sans-serif;
+  font-size: 35px;
 `;
 
 const ContainerMain = styled.div`

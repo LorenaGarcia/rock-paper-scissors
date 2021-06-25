@@ -4,6 +4,7 @@ import axios from "axios";
 import { Layout } from "./components/Layout";
 import { Options } from "./components/Options";
 import { Game } from "./components/Game";
+import { Spinner } from "./components/Spinner";
 
 import imageRock from "./images/mini-r.png";
 import imagePaper from "./images/mini-p.png";
@@ -63,7 +64,7 @@ function App() {
 
       setTimeout(() => {
         setGameOver(true);
-      }, 1000);
+      }, 900);
     }
   }, [allMovements]);
 
@@ -122,10 +123,16 @@ function App() {
         isLoading={isLoading}
         setUserMovement={setUserMovement}
       />
-      {allMovements.length !== 0 && (
-        <p style={{ color: "red" }}>Round {allMovements.length}</p>
+      {allMovements.length === 0 || allMovements.length === 1 ? (
+        <p style={{ color: "red" }}>Round 1 </p>
+      ) : allMovements.length === 5 ? (
+        <p style={{ color: "red" }}>One More Game </p>
+      ) : allMovements.length === 6 ? (
+        <p style={{ color: "red" }}>Game Over </p>
+      ) : (
+        <p style={{ color: "red" }}>Round {allMovements.length} </p>
       )}
-      {isLoading && <p style={{ color: "blue" }}>Loading...</p>}
+      {isLoading && <Spinner />}
       {!gameOver && allMovements ? (
         allMovements.map((value, idx) => (
           <Game key={idx} user={value.user} cpu={value.cpu} images={images} />
