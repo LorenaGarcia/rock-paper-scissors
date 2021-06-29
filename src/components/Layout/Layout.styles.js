@@ -25,6 +25,7 @@ const Main = styled.div`
 
 const Title = styled.p`
   color: #ffffff;
+  text-shadow: 0 0 2px #f7b5f5, 0 0 5px #f7b5f5, 0 0 10px #f7b5f5;
   text-align: center;
   font-size: 30px;
   margin: 1rem;

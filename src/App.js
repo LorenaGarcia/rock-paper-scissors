@@ -4,6 +4,8 @@ import axios from "axios";
 import { Layout } from "./components/Layout";
 import { Options } from "./components/Options";
 import { Game } from "./components/Game";
+import { Home } from "./components/Home";
+import { Messages } from "./components/Messages";
 import { Spinner } from "./components/Spinner";
 
 import imageRock from "./images/mini-r.png";
@@ -11,6 +13,7 @@ import imagePaper from "./images/mini-p.png";
 import imageScissor from "./images/mini-s.png";
 
 function App() {
+  const [startPlay, setStartPlay] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isDisabled, setDisabled] = useState(false);
   const [gameOver, setGameOver] = useState(false);
@@ -20,6 +23,20 @@ function App() {
   const [allMovements, setAllMovements] = useState([]);
   const [userMovement, setUserMovement] = useState(null);
   const [cpuMovement, setCPUMovement] = useState(null);
+
+  useEffect(() => {
+    if (startPlay) {
+      setIsLoading(true);
+      setAllMovements([]);
+      setGameOver(false);
+      setDisabled(false);
+      setUserMovement(null);
+      setCPUMovement(null);
+      setUserWon(0);
+      setCpuWon(0);
+      setIsLoading(false);
+    }
+  }, [startPlay]);
 
   useEffect(() => {
     if (userMovement) {
@@ -64,6 +81,7 @@ function App() {
 
       setTimeout(() => {
         setGameOver(true);
+        setStartPlay(false);
       }, 900);
     }
   }, [allMovements]);
@@ -112,33 +130,48 @@ function App() {
         setCpuWon(cpuWon + 1);
     }
   };
-  console.log("gameOver", gameOver);
 
   return (
     <Layout>
-      <Options
-        userWon={userWon}
-        cpuWon={cpuWon}
-        isDisabled={isDisabled}
-        isLoading={isLoading}
-        setUserMovement={setUserMovement}
-      />
-      {allMovements.length === 0 || allMovements.length === 1 ? (
-        <p style={{ color: "red" }}>Round 1 </p>
-      ) : allMovements.length === 5 ? (
-        <p style={{ color: "red" }}>One More Game </p>
-      ) : allMovements.length === 6 ? (
-        <p style={{ color: "red" }}>Game Over </p>
+      {!startPlay && !gameOver ? (
+        <Home setStartPlay={setStartPlay} />
+      ) : gameOver && !startPlay ? (
+        <Messages setStartPlay={setStartPlay} winner={true}>
+          {message}
+        </Messages>
       ) : (
-        <p style={{ color: "red" }}>Round {allMovements.length} </p>
-      )}
-      {isLoading && <Spinner />}
-      {!gameOver && allMovements ? (
-        allMovements.map((value, idx) => (
-          <Game key={idx} user={value.user} cpu={value.cpu} images={images} />
-        ))
-      ) : (
-        <p style={{ color: "yellow" }}>{message}</p>
+        <>
+          {!gameOver && (
+            <Options
+              userWon={userWon}
+              cpuWon={cpuWon}
+              isDisabled={isDisabled}
+              isLoading={isLoading}
+              setUserMovement={setUserMovement}
+            />
+          )}
+
+          {allMovements.length === 0 ? (
+            <Messages>Make your first move </Messages>
+          ) : allMovements.length === 5 ? (
+            <Messages oneMore={true}>One More Game </Messages>
+          ) : allMovements.length === 6 ? (
+            <Messages>Game Over </Messages>
+          ) : (
+            <Messages>Round {allMovements.length} </Messages>
+          )}
+          {isLoading && <Spinner />}
+          {!gameOver &&
+            allMovements &&
+            allMovements.map((value, idx) => (
+              <Game
+                key={idx}
+                user={value.user}
+                cpu={value.cpu}
+                images={images}
+              />
+            ))}
+        </>
       )}
     </Layout>
   );

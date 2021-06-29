@@ -29,6 +29,17 @@ const Circle = styled.div`
   border-radius: 100%;
   padding: 0.5rem;
   opacity: ${(props) => (props.disabled ? "0.4" : "initial")};
+
+  :hover {
+    box-shadow: ${(props) =>
+      props.background &&
+      "0 0 5px" +
+        props.background +
+        ", 0 0 10px " +
+        props.background +
+        ", 0 0 20px " +
+        props.background};
+  }
 `;
 
 const FlexContainer = styled.div`
@@ -40,6 +51,7 @@ const FlexContainer = styled.div`
 `;
 
 const Title = styled.p`
+  font-family: "Oswald", sans-serif;
   margin: 0;
   margin-bottom: 0.5rem;
   font-size: 20px;
@@ -47,6 +59,7 @@ const Title = styled.p`
 `;
 
 const Accountant = styled.p`
+  font-family: "Oswald", sans-serif;
   margin: 0;
   margin-bottom: 0.5rem;
   font-size: 16px;
@@ -54,6 +67,7 @@ const Accountant = styled.p`
 `;
 
 const TitleScore = styled.p`
+  font-family: "Oswald", sans-serif;
   text-align: center;
   font-size: 25px;
   font-weight: bold;
