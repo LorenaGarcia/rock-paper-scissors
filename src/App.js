@@ -70,11 +70,11 @@ function App() {
     if (allMovements.length !== 0 && allMovements.length === 6) {
       setIsLoading(true);
       if (userWon > cpuWon) {
-        setMessage("You win!!!");
+        setMessage("You win!!!  :)");
       } else if (userWon < cpuWon) {
-        setMessage("You lost!!!");
+        setMessage("You lost :(");
       } else {
-        setMessage("It's a tie");
+        setMessage("It's a tie!");
       }
       setIsLoading(false);
       setDisabled(true);

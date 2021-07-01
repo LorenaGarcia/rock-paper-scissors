@@ -45,7 +45,7 @@ const Options = ({ userWon, cpuWon, isDisabled, setUserMovement }) => {
       </FlexOptions>
       <TitleScore>Score</TitleScore>
       <FlexContainer>
-        <Title>Me</Title> <Title>CPU</Title>
+        <Title>Me</Title> <Title>Computer</Title>
       </FlexContainer>
       <FlexContainer>
         <Accountant>{userWon}</Accountant> <Accountant>{cpuWon}</Accountant>
